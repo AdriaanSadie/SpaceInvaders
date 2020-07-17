@@ -1,22 +1,39 @@
-Changes:
+# CPPND: Capstone Hello World Repo
 
-Installed SDL_image library using:
+##Additional libraries required:
+
+Make sure the SDL and SDL_image libraries are installed:
 >> sudo apt-get install libsdl2-dev libsdl2-image-dev
 
-Changed following lines in CMakeLists.txt:
-
-include_directories(${SDL2_INCLUDE_DIRS} src)
-target_link_libraries(SpaceInvaders ${SDL2_LIBRARIES})
-
-to
-
-include_directories(${SDL2_INCLUDE_DIRS} src ${SDL2IMAGE_INCLUDE_DIRS})
-target_link_libraries(SpaceInvaders ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES})
-
-in order to include and link the SDL_image library. I'm using the library to import PNG images with a transparent background, since
-BMP images do no include an alpha channel with transparent data.
+I'm using the library to import PNG images with a transparent background, since BMP images do not include an alpha channel with transparent data.
 
 
+
+## Specifications met as stated on Project Rubric:
+
+Base requirements:
+
+1. A README with instructions is included with the project
+	* The README is included with the project and has instructions for building/running the project.
+    * Additional libraries needed to run the project are indicated with cross-platform installation instructions.
+    * README submitted as markdown
+    
+2. The README indicates which project is chosen.
+	* The README describes the project.
+    * The README also indicates the file and class structure, along with the expected behavior or output of the program.
+
+3. The README includes information about each rubric point addressed.
+	* The README indicates which rubric points are addressed.
+    * The README also indicates where in the code (i.e. files and line numbers) that the rubric points are addressed.
+    
+4. The submission compiles and runs.
+	* The project code compilea and runa without errors.
+    * CMake and Make is used as building tools.
+    
+Additional requirements:
+
+
+    
 
 
 
@@ -25,3 +42,5 @@ BMP images do no include an alpha channel with transparent data.
 
 
 git config --global user.name "AdriaanSadie" && git config --global user.email "sadieadriaan@gmail.com"
+
+

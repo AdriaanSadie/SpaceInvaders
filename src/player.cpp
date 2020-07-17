@@ -3,35 +3,7 @@
 #include <iostream>
 
 void Player::Update() {
-  /*
-  switch (direction) {
-    case Direction::kLeft:
-      pos_x -= speed;
-      break;
-      
-    case Direction::kRight:
-      pos_x += speed;
-      break;
-      
-    case Direction::kUp:
-      pos_y -= speed;
-      break;
-      
-    case Direction::kDown:
-      pos_y += speed;
-    
-    case Direction::kIdle:
-      break;
-  }
-  */
-  
-  /*
-  if (direction == Direction::kLeft) 	{ pos_x -= speed; }
-  if (direction == Direction::kRight) 	{ pos_x += speed; }
-  if (direction == Direction::kUp)		{ pos_y -= speed; }
-  if (direction == Direction::kDown)	{ pos_y += speed; } 
-  */
-  
+
   if (!move_idle) {
     if (move_up) 	{ pos_y -= speed; }
     if (move_down)	{ pos_y += speed; } 
@@ -39,11 +11,14 @@ void Player::Update() {
     if (move_left) 	{ pos_x -= speed; }
   }
   
-  
   // Do some boundary checks
   if (pos_x <= 0) { pos_x = 0; }
-  if ((pos_x + player_width)  >= screen_width) { pos_x = screen_width - player_width; }
+  if ((pos_x + width)  >= screen_width) { pos_x = screen_width - width; }
   if (pos_y <= 0) { pos_y = 0; }
-  if ((pos_y + player_height)  >= screen_height) { pos_y = screen_height - player_height; }
+  if ((pos_y + height)  >= screen_height) { pos_y = screen_height - height; }
+  
+}
+
+void Projectile::Update(){
   
 }

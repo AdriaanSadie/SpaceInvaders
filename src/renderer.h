@@ -11,7 +11,7 @@ class Renderer {
   Renderer(const std::size_t screen_width, const std::size_t screen_height);
   ~Renderer();
 
-  void Render(Player const player);
+  void Render(Player const player, std::vector<Projectile> const bullets);
   void UpdateWindowTitle(int fps);
 
  private:
@@ -22,6 +22,8 @@ class Renderer {
   SDL_Texture *background_texture = nullptr;
   SDL_Surface *ship_surface = nullptr;
   SDL_Texture *ship_texture = nullptr;
+  SDL_Surface *bullet_surface = nullptr;
+  SDL_Texture *bullet_texture = nullptr;
 
   const std::size_t screen_width;
   const std::size_t screen_height;

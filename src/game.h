@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include <random>
+#include <vector>
 #include "SDL.h"
 #include "renderer.h"
 #include "player.h"
@@ -15,6 +16,7 @@ class Game {
   
  private:
   Player player;
+  std::vector<Projectile> bullets;
 
 };
 

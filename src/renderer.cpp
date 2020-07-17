@@ -24,13 +24,20 @@ Renderer::Renderer(const std::size_t screen_width, const std::size_t screen_heig
     std::cerr << "SDL_Error: " << SDL_GetError() << "\n";
   }
   
-  // Load player image and background:
-  background_surface = SDL_LoadBMP("back.bmp"); 
-  background_texture = SDL_CreateTextureFromSurface(sdl_renderer, background_surface); // Convert surface to texture
-  SDL_FreeSurface(background_surface); // Free surface since we will only be using texture from now on
-  ship_surface = IMG_Load("ship.png");
-  ship_texture = SDL_CreateTextureFromSurface(sdl_renderer, ship_surface); // Convert surface to texture
-  SDL_FreeSurface(ship_surface); // Free surface since we will only be using texture from now on
+  // Load all assets:
+  background_surface = SDL_LoadBMP("assets/back.bmp"); // Background
+  ship_surface = IMG_Load("assets/ship.png"); // Spaceship
+  bullet_surface = IMG_Load("assets/bullet.png"); // Bullets
+  
+  // Convert surface to texture
+  background_texture = SDL_CreateTextureFromSurface(sdl_renderer, background_surface); 
+  ship_texture = SDL_CreateTextureFromSurface(sdl_renderer, ship_surface); 
+  bullet_texture = SDL_CreateTextureFromSurface(sdl_renderer, bullet_surface);
+  
+  // Free surfaces since we will only be using textures from now on
+  SDL_FreeSurface(background_surface);
+  SDL_FreeSurface(ship_surface);
+  SDL_FreeSurface(bullet_surface); 
 }
 
 Renderer::~Renderer() {
@@ -40,7 +47,7 @@ Renderer::~Renderer() {
   SDL_Quit();
 }
 
-void Renderer::Render(Player const player) {
+void Renderer::Render(Player const player, std::vector<Projectile> const bullets) {
 
   // Clear screen
   //SDL_SetRenderDrawColor(sdl_renderer, 0x1E, 0x1E, 0x1E, 0xFF);
@@ -50,8 +57,14 @@ void Renderer::Render(Player const player) {
   SDL_RenderCopy(sdl_renderer, background_texture, NULL, NULL);
   
   // Render ship
-  SDL_Rect dstrect = { (int)player.pos_x, (int)player.pos_y, player.player_width, player.player_height };
-  SDL_RenderCopy(sdl_renderer, ship_texture, NULL, &dstrect);
+  SDL_Rect player_rect = { (int)player.pos_x, (int)player.pos_y, player.width, player.height };
+  SDL_RenderCopy(sdl_renderer, ship_texture, NULL, &player_rect);
+  
+  // Render bullets
+  for (auto i : bullets) {
+    SDL_Rect bullet = { (int)i.pos_x, i.pos_y, i.width, i.height };
+    SDL_RenderCopy(sdl_renderer, bullet_texture, NULL, &bullet);
+  }
 
   // Update Screen
   SDL_RenderPresent(sdl_renderer);

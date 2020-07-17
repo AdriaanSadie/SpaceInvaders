@@ -16,9 +16,9 @@ void Game::Run(Controller const &controller, Renderer &renderer, std::size_t tar
     frame_start = SDL_GetTicks();
 
     // Input, Update, Render - the main game loop.
-	controller.HandleInput(running, player);
+	controller.HandleInput(running, player, bullets);
     player.Update();
-    renderer.Render(player);
+    renderer.Render(player, bullets);
 
     frame_end = SDL_GetTicks();
 
@@ -43,5 +43,8 @@ void Game::Run(Controller const &controller, Renderer &renderer, std::size_t tar
   }
 }
 
+void Game::Update() {
+  
+}
 
 
