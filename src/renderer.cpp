@@ -27,7 +27,9 @@ Renderer::Renderer(const std::size_t screen_width, const std::size_t screen_heig
   // Load player image:
   background_surface = SDL_LoadBMP("back.bmp");
   background_texture = SDL_CreateTextureFromSurface(sdl_renderer, background_surface);
-  ship_surface = SDL_LoadBMP("ship.bmp");
+  //ship_surface = SDL_LoadBMP("ship.bmp");
+  //ship_texture = SDL_CreateTextureFromSurface(sdl_renderer, ship_surface);
+  ship_surface = IMG_Load("ship.png");
   ship_texture = SDL_CreateTextureFromSurface(sdl_renderer, ship_surface);
 }
 
