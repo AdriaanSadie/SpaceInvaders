@@ -15,3 +15,13 @@ target_link_libraries(SpaceInvaders ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES})
 
 in order to include and link the SDL_image library. I'm using the library to import PNG images with a transparent background, since
 BMP images do no include an alpha channel with transparent data.
+
+
+
+
+
+
+
+
+
+git config --global user.name "AdriaanSadie" && git config --global user.email "sadieadriaan@gmail.com"
