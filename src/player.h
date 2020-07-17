@@ -21,6 +21,12 @@ public:
   int player_width = 50;
   int player_height = 50;
   
+  bool move_up = false;
+  bool move_down = false;
+  bool move_right = false;
+  bool move_left = false;
+  bool move_idle = true;
+  
 private:
   
   int screen_width;
