@@ -2,9 +2,9 @@
 #include <iostream>
 #include "SDL.h"
 
-Game::Game() {}
+Game::Game(int screen_width, int screen_height) : player(screen_width, screen_height) {}
 
-void Game::Run(Renderer &renderer, std::size_t target_frame_duration) {
+void Game::Run(Controller const &controller, Renderer &renderer, std::size_t target_frame_duration) {
   Uint32 title_timestamp = SDL_GetTicks();
   Uint32 frame_start;
   Uint32 frame_end;
@@ -16,9 +16,9 @@ void Game::Run(Renderer &renderer, std::size_t target_frame_duration) {
     frame_start = SDL_GetTicks();
 
     // Input, Update, Render - the main game loop.
-	// ADD CONTROLLER HERE
-    // UPDATE STATE HERE
-    renderer.Render();
+	controller.HandleInput(running, player);
+    player.Update();
+    renderer.Render(player);
 
     frame_end = SDL_GetTicks();
 

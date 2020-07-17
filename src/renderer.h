@@ -4,13 +4,14 @@
 #include <vector>
 #include "SDL.h"
 #include "SDL_image.h"
+#include "player.h"
 
 class Renderer {
  public:
   Renderer(const std::size_t screen_width, const std::size_t screen_height);
   ~Renderer();
 
-  void Render();
+  void Render(Player const player);
   void UpdateWindowTitle(int fps);
 
  private:

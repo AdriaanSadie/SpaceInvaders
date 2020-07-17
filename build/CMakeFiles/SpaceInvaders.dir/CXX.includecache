@@ -6,6 +6,12 @@
 
 #IncludeRegexTransform: 
 
+/home/workspace/SpaceInvaders/src/player.h
+vector
+-
+SDL.h
+/home/workspace/SpaceInvaders/src/SDL.h
+
 /home/workspace/SpaceInvaders/src/renderer.cpp
 renderer.h
 /home/workspace/SpaceInvaders/src/renderer.h
@@ -21,6 +27,8 @@ SDL.h
 /home/workspace/SpaceInvaders/src/SDL.h
 SDL_image.h
 /home/workspace/SpaceInvaders/src/SDL_image.h
+player.h
+/home/workspace/SpaceInvaders/src/player.h
 
 /usr/include/SDL2/SDL.h
 SDL_main.h

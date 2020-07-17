@@ -13,10 +13,12 @@ int main() {
   
   // Create render object to handle the visual output of the game
   Renderer renderer(kScreenWidth, kScreenHeight);
+  // Create controller object to handle input
+  Controller controller;
   // Create game object that runs the game loop
-  Game game;
+  Game game(kScreenWidth, kScreenHeight);
   // Call run function, by giving the game the render and controller objects as well as the desired framerate of the game window
-  game.Run(renderer, kMsPerFrame);
+  game.Run(controller, renderer, kMsPerFrame);
   
   return 0;
 }
