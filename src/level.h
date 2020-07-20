@@ -22,7 +22,7 @@ private:
 class Level {
 public:
   int difficulty = 1;
-  void PopulateEnemies(int, int);  
+  void PopulateEnemies(int, int, int);  
   void Update(Player&);
   bool CheckCollide(Projectile);
   bool CheckRange(Enemy, Projectile);

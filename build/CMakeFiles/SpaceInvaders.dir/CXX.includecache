@@ -6,15 +6,27 @@
 
 #IncludeRegexTransform: 
 
-/home/workspace/SpaceInvaders/src/player.cpp
-player.h
-/home/workspace/SpaceInvaders/src/player.h
-cmath
--
+/home/workspace/SpaceInvaders/src/level.cpp
+level.h
+/home/workspace/SpaceInvaders/src/level.h
 iostream
+-
+fstream
+-
+sstream
+-
+string
 -
 algorithm
 -
+
+/home/workspace/SpaceInvaders/src/level.h
+vector
+-
+SDL.h
+/home/workspace/SpaceInvaders/src/SDL.h
+player.h
+/home/workspace/SpaceInvaders/src/player.h
 
 /home/workspace/SpaceInvaders/src/player.h
 vector

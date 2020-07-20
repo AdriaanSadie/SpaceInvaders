@@ -17,7 +17,7 @@ void Game::Run(Controller const &controller, Renderer &renderer, std::size_t tar
   int frame_count = 0;
   bool running = true;
   
-  level.PopulateEnemies(screen_width,screen_height);
+  level.PopulateEnemies(screen_width,screen_height,2); // third parameter is difficulty, 1-3: easy-hard
 
   while (running) {
     frame_start = SDL_GetTicks();
