@@ -20,5 +20,6 @@ void Player::Update() {
 }
 
 void Projectile::Update(){
-  
+  // Move projectile upwards
+  pos_y -= speed;  
 }

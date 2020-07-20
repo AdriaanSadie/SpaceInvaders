@@ -12,7 +12,7 @@ class Renderer {
   ~Renderer();
 
   void Render(Player const player, std::vector<Projectile> const bullets);
-  void UpdateWindowTitle(int fps);
+  void UpdateWindowTitle(int fps, int bullets);
 
  private:
   SDL_Window *sdl_window;

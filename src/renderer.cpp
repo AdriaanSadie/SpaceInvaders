@@ -62,7 +62,7 @@ void Renderer::Render(Player const player, std::vector<Projectile> const bullets
   
   // Render bullets
   for (auto i : bullets) {
-    SDL_Rect bullet = { (int)i.pos_x, i.pos_y, i.width, i.height };
+    SDL_Rect bullet = { (int)i.pos_x, (int)i.pos_y, i.width, i.height };
     SDL_RenderCopy(sdl_renderer, bullet_texture, NULL, &bullet);
   }
 
@@ -70,7 +70,7 @@ void Renderer::Render(Player const player, std::vector<Projectile> const bullets
   SDL_RenderPresent(sdl_renderer);
 }
 
-void Renderer::UpdateWindowTitle(int fps) {
-  std::string title{"Space Invaders --  FPS: " + std::to_string(fps)};
+void Renderer::UpdateWindowTitle(int fps, int bullets) {
+  std::string title{"Space Invaders --  FPS: " + std::to_string(fps) + " bullets: " + std::to_string(bullets)};
   SDL_SetWindowTitle(sdl_window, title.c_str());
 }

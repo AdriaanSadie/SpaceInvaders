@@ -6,6 +6,14 @@
 
 #IncludeRegexTransform: 
 
+/home/workspace/SpaceInvaders/src/controller.cpp
+controller.h
+/home/workspace/SpaceInvaders/src/controller.h
+iostream
+-
+SDL.h
+/home/workspace/SpaceInvaders/src/SDL.h
+
 /home/workspace/SpaceInvaders/src/controller.h
 player.h
 /home/workspace/SpaceInvaders/src/player.h
@@ -19,6 +27,8 @@ iostream
 -
 SDL.h
 /home/workspace/SpaceInvaders/src/SDL.h
+algorithm
+-
 
 /home/workspace/SpaceInvaders/src/game.h
 random
@@ -34,11 +44,35 @@ player.h
 controller.h
 /home/workspace/SpaceInvaders/src/controller.h
 
+/home/workspace/SpaceInvaders/src/main.cpp
+iostream
+-
+renderer.h
+/home/workspace/SpaceInvaders/src/renderer.h
+game.h
+/home/workspace/SpaceInvaders/src/game.h
+
+/home/workspace/SpaceInvaders/src/player.cpp
+player.h
+/home/workspace/SpaceInvaders/src/player.h
+cmath
+-
+iostream
+-
+
 /home/workspace/SpaceInvaders/src/player.h
 vector
 -
 SDL.h
 /home/workspace/SpaceInvaders/src/SDL.h
+
+/home/workspace/SpaceInvaders/src/renderer.cpp
+renderer.h
+/home/workspace/SpaceInvaders/src/renderer.h
+iostream
+-
+string
+-
 
 /home/workspace/SpaceInvaders/src/renderer.h
 vector

@@ -1,8 +1,18 @@
 #include "game.h"
 #include <iostream>
 #include "SDL.h"
+#include <algorithm>
 
-Game::Game(int screen_width, int screen_height) : player(screen_width, screen_height) {}
+Game::Game(int screen_width, int screen_height) : player(screen_width, screen_height), screen_width(screen_width), screen_height(screen_height) {}
+
+void Game::Update() {  
+  player.Update();
+  for (auto& i : bullets){
+    i.Update();
+  }
+  
+  bullets.erase(std::remove_if(bullets.begin(), bullets.end(), [](Projectile p) { return p.pos_y < -p.height; }), bullets.end());
+}
 
 void Game::Run(Controller const &controller, Renderer &renderer, std::size_t target_frame_duration) {
   Uint32 title_timestamp = SDL_GetTicks();
@@ -17,7 +27,7 @@ void Game::Run(Controller const &controller, Renderer &renderer, std::size_t tar
 
     // Input, Update, Render - the main game loop.
 	controller.HandleInput(running, player, bullets);
-    player.Update();
+    Update();
     renderer.Render(player, bullets);
 
     frame_end = SDL_GetTicks();
@@ -29,7 +39,7 @@ void Game::Run(Controller const &controller, Renderer &renderer, std::size_t tar
 
     // After every second, update the window title.
     if (frame_end - title_timestamp >= 1000) {
-      renderer.UpdateWindowTitle(frame_count);
+      renderer.UpdateWindowTitle(frame_count, bullets.size());
       frame_count = 0;
       title_timestamp = frame_end;
     }
@@ -43,8 +53,5 @@ void Game::Run(Controller const &controller, Renderer &renderer, std::size_t tar
   }
 }
 
-void Game::Update() {
-  
-}
 
 

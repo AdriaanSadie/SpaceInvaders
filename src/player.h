@@ -11,6 +11,7 @@ public:
   
   void Update();
   
+  float speed = 5;
   int width = 40;
   int height = 40;
   float pos_x;
@@ -43,6 +44,8 @@ private:
   
   int screen_width;
   int screen_height;
+  
+  //
 
 };
 
