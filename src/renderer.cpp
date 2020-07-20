@@ -28,16 +28,19 @@ Renderer::Renderer(const std::size_t screen_width, const std::size_t screen_heig
   background_surface = SDL_LoadBMP("assets/back.bmp"); // Background
   ship_surface = IMG_Load("assets/ship.png"); // Spaceship
   bullet_surface = IMG_Load("assets/bullet.png"); // Bullets
+  alien1_surface = IMG_Load("assets/alien1.png"); // Enemies
   
   // Convert surface to texture
   background_texture = SDL_CreateTextureFromSurface(sdl_renderer, background_surface); 
   ship_texture = SDL_CreateTextureFromSurface(sdl_renderer, ship_surface); 
   bullet_texture = SDL_CreateTextureFromSurface(sdl_renderer, bullet_surface);
+  alien1_texture = SDL_CreateTextureFromSurface(sdl_renderer, alien1_surface);
   
   // Free surfaces since we will only be using textures from now on
   SDL_FreeSurface(background_surface);
   SDL_FreeSurface(ship_surface);
   SDL_FreeSurface(bullet_surface); 
+  SDL_FreeSurface(alien1_surface); 
 }
 
 Renderer::~Renderer() {
@@ -47,7 +50,7 @@ Renderer::~Renderer() {
   SDL_Quit();
 }
 
-void Renderer::Render(Player const player, std::vector<Projectile> const bullets) {
+void Renderer::Render(Player const player, Level const level) {
 
   // Clear screen
   //SDL_SetRenderDrawColor(sdl_renderer, 0x1E, 0x1E, 0x1E, 0xFF);
@@ -61,9 +64,15 @@ void Renderer::Render(Player const player, std::vector<Projectile> const bullets
   SDL_RenderCopy(sdl_renderer, ship_texture, NULL, &player_rect);
   
   // Render bullets
-  for (auto i : bullets) {
+  for (auto i : player.bullets) {
     SDL_Rect bullet = { (int)i.pos_x, (int)i.pos_y, i.width, i.height };
     SDL_RenderCopy(sdl_renderer, bullet_texture, NULL, &bullet);
+  }
+  
+  // Render enemies
+  for (auto i : level.enemies) {
+    SDL_Rect enemy = { (int)i.pos_x, (int)i.pos_y, i.width, i.height };
+    SDL_RenderCopy(sdl_renderer, alien1_texture, NULL, &enemy);  
   }
 
   // Update Screen

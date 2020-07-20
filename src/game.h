@@ -7,6 +7,7 @@
 #include "renderer.h"
 #include "player.h"
 #include "controller.h"
+#include "level.h"
 
 
 class Game {
@@ -17,7 +18,7 @@ class Game {
   
  private:
   Player player;
-  std::vector<Projectile> bullets;
+  Level level;
   int screen_width;
   int screen_height;
 

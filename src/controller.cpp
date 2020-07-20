@@ -2,7 +2,7 @@
 #include <iostream>
 #include "SDL.h"
 
-void Controller::HandleInput(bool &running, Player &player, std::vector<Projectile> &bullets) const {
+void Controller::HandleInput(bool &running, Player &player) const {
   
   const Uint8 *keyboard_state_array = SDL_GetKeyboardState(NULL);
   SDL_Event event;
@@ -39,12 +39,14 @@ void Controller::HandleInput(bool &running, Player &player, std::vector<Projecti
     }
     if (keyboard_state_array[SDL_SCANCODE_SPACE])
     {
-      Projectile bullet(player.pos_x, player.pos_y);
-      bullets.push_back(bullet);
-      //if(!bullets.empty()) { std::cout << "Bullet vector not empty" << std::endl; }
+      player.Shoot();
     }
     if ( !keyboard_state_array[SDL_SCANCODE_RIGHT] && !keyboard_state_array[SDL_SCANCODE_LEFT] && !keyboard_state_array[SDL_SCANCODE_UP] && !keyboard_state_array[SDL_SCANCODE_DOWN] ){
       player.move_idle = true;  
+    }
+    if (keyboard_state_array[SDL_SCANCODE_ESCAPE])
+    {
+      running = false;
     }
   }
   

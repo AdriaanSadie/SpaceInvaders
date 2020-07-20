@@ -12,8 +12,8 @@ public:
   void Update();
   
   float speed = 5;
-  int width = 40;
-  int height = 40;
+  int width = 12;
+  int height = 29;
   float pos_x;
   float pos_y;
 private:
@@ -26,6 +26,8 @@ public:
   Player(int screen_width, int screen_height) : pos_x(screen_width/2), pos_y(screen_height/2), screen_width(screen_width), screen_height(screen_height) {}
   
   void Update();
+  
+  void Shoot();
 
   float speed = 4;
   bool alive = true;
@@ -33,6 +35,8 @@ public:
   float pos_y;
   int width = 50;
   int height = 50;
+  
+  std::vector<Projectile> bullets;
   
   bool move_up = false;
   bool move_down = false;

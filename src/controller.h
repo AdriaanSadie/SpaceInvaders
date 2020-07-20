@@ -6,7 +6,7 @@
 
 class Controller {
  public:
-  void HandleInput(bool &running, Player &player, std::vector<Projectile> &bullets) const;
+  void HandleInput(bool &running, Player &player) const;
 
  private:
 };

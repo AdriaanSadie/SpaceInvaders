@@ -1,6 +1,7 @@
 #include "player.h"
 #include <cmath>
 #include <iostream>
+#include <algorithm>
 
 void Player::Update() {
 
@@ -17,6 +18,18 @@ void Player::Update() {
   if (pos_y <= 0) { pos_y = 0; }
   if ((pos_y + height)  >= screen_height) { pos_y = screen_height - height; }
   
+  
+  // Update bullets:
+  for (auto& i : bullets){
+    i.Update();
+  }
+  bullets.erase(std::remove_if(bullets.begin(), bullets.end(), [](Projectile p) { return p.pos_y < -p.height; }), bullets.end());
+  
+}
+
+void Player::Shoot() {
+  Projectile bullet(pos_x + width/2 - 6, pos_y);
+  bullets.push_back(bullet);
 }
 
 void Projectile::Update(){
