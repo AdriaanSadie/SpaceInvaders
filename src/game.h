@@ -8,6 +8,7 @@
 #include "player.h"
 #include "controller.h"
 #include "level.h"
+#include <string>
 
 
 class Game {
@@ -17,6 +18,14 @@ class Game {
   void Update();
   
  private:
+  
+  int difficulty = 1;
+  int enemy_layers = 1;
+  int enemy_numbers = 5;
+  std::string high_score_name = "";
+  int high_score_value = 0;
+  
+  void LoadConfig(int,int&,int&,std::string&,int&);
   Player player;
   Level level;
   int screen_width;

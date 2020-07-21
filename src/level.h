@@ -11,7 +11,7 @@ public:
   Enemy(float x, float y) : pos_x(x), pos_y(y) {}  
   float pos_x;
   float pos_y;
-  float speed = 0.4;
+  float speed = 1;
   int width = 40;
   int height = 40;
   bool alive = true;
@@ -21,16 +21,28 @@ private:
 
 class Level {
 public:
-  int difficulty = 1;
-  void PopulateEnemies(int, int, int);  
+  
+  // Constructor
+  Level(int screen_width, int screen_height) : screen_width(screen_width), screen_height(screen_height) {}
+  
+  // Public methods
+  void PopulateEnemies(int, int);  
   void Update(Player&);
   bool CheckCollide(Projectile);
   bool CheckRange(Enemy, Projectile);
   void MoveEnemies();
+  
+  // Public members
   std::vector<Enemy> enemies;
+  bool Enemy_mLeft = true;
+  bool Enemy_mRight = false;
+  bool Enemy_mDown = false;
+  int down_counter = 0;
+  int difficulty = 1;
   
 private:
-  
+  int screen_width;
+  int screen_height;
 };
 
 #endif

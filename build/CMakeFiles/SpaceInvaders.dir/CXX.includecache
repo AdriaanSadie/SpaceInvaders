@@ -11,10 +11,6 @@ level.h
 /home/workspace/SpaceInvaders/src/level.h
 iostream
 -
-fstream
--
-sstream
--
 string
 -
 algorithm
