@@ -25,6 +25,8 @@ class Renderer {
   SDL_Texture *ship_texture = nullptr;
   SDL_Surface *bullet_surface = nullptr;
   SDL_Texture *bullet_texture = nullptr;
+  SDL_Surface *laser_surface = nullptr;
+  SDL_Texture *laser_texture = nullptr;
   SDL_Surface *alien1_surface = nullptr;
   SDL_Texture *alien1_texture = nullptr;
 

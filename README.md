@@ -1,12 +1,24 @@
-# CPPND: Capstone Hello World Repo
+# CPPND: Capstone C++ Project Space Invaders
 
-##Additional libraries required:
+## Project Description
+
+Option 1 (video game) was chosen for a project. A simple version of Space Invaders was written, using the starter code of the Snake project as base. The game starts by showing the user a menu, where the difficulty is chosen. After this the game starts, where enemies (which are able to shoot) start to move from the top of the screen slowly to the bottom. The objective of the player is to shoot the enemies before they reach the player, or the bottom of the screen. When a player wins, the high score is updated and stored. When the player loses, a Game Over screen is shown (depending on the current score, the high score is updated) and an option is given to start over.
+
+## Additional libraries required:
 
 Make sure the SDL and SDL_image libraries are installed:
 >> sudo apt-get install libsdl2-dev libsdl2-image-dev
 
-I'm using the library to import PNG images with a transparent background, since BMP images do not include an alpha channel with transparent data.
+The SDL_image library is used to import PNG images with a transparent background, since the base SDL library can only import BMP images, which do not include an alpha channel with transparent data.
 
+## To build and run:
+
+1. Create a build directory and change current directory to build:
+	* >> mkdir build && cd build
+2. Run Cmake and Make from build:
+	* >> cmake .. && make
+3. Run game:
+	* >> ./SpaceInvaders
 
 
 ## Specifications met as stated on Project Rubric:
@@ -27,7 +39,7 @@ Base requirements:
     * The README also indicates where in the code (i.e. files and line numbers) that the rubric points are addressed.
     
 4. The submission compiles and runs.
-	* The project code compilea and runa without errors.
+	* The project code compiles and runs without errors.
     * CMake and Make is used as building tools.
     
 Additional requirements:

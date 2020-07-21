@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 #include <algorithm>
-
+#include <time.h>
 
 void Level::PopulateEnemies(int enemy_layers, int enemy_numbers){
   for (int i = 0; i < enemy_layers; i++){
@@ -18,6 +18,9 @@ void Level::Update(Player &player) {
   player.bullets.erase(std::remove_if(player.bullets.begin(), player.bullets.end(), [this](Projectile p) { return CheckCollide(p); }), player.bullets.end());
   // After checking collision, update enemy movement
   MoveEnemies();
+  EnemyShoot(2);
+  UpdateLasers();
+  std::cout << "Laser vector size: " << lasers.size() << std::endl;
 }
 
 bool Level::CheckCollide(Projectile p){
@@ -48,7 +51,7 @@ void Level::MoveEnemies(){
         Enemy_mDown = true;  
       }
     }
-    else if (Enemy_mRight && !Enemy_mDown){
+    else if (!Enemy_mLeft && !Enemy_mDown){
       // Enemies moving right
       e.pos_x += e.speed;
       // Check borders (if a single enemy reaches it, the direction changes to down)
@@ -60,19 +63,36 @@ void Level::MoveEnemies(){
       // Enemies moving down
       e.pos_y += e.speed;
       down_counter++;
-      // Check down counter. When limit reached, change direction from left to right or vice versa
-      if (down_counter > 200){
+      // Check down counter. When limit (hardcoded) reached, change direction from left to right or vice versa
+      if (down_counter > 150){
         down_counter = 0;
         Enemy_mDown = false;
-        if (Enemy_mLeft) {
-          Enemy_mLeft = false;
-          Enemy_mRight = true;
-        }
-        else{
-          Enemy_mLeft = true;
-          Enemy_mRight = false;
-        }
+        if (Enemy_mLeft) { Enemy_mLeft = false; }
+        else{ Enemy_mLeft = true; }
       }
     }
   }
 }
+
+void Level::EnemyShoot(int chance){
+  // Here we generate lasers from random enemies by using a random number generator. 
+  int rand_num;
+  srand (time(NULL));
+  
+  // Loop through all enemies. Base on the chance factor input, the enemy will shoot and add projectile to vector
+  for (auto e: enemies){
+    // Generate random number between 1 and 10
+    rand_num = rand() % 10 + 1;
+    if (rand_num <= chance){
+      Projectile laser(e.pos_x + e.width/2 - 6, e.pos_y);
+      lasers.push_back(laser);
+    }
+  }
+}
+
+void Level::UpdateLasers(){
+  for (auto &b : lasers) {
+    b.pos_y += b.speed;
+  }
+}
+

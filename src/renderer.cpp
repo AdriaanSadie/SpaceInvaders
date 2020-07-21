@@ -29,18 +29,21 @@ Renderer::Renderer(const std::size_t screen_width, const std::size_t screen_heig
   ship_surface = IMG_Load("assets/ship.png"); // Spaceship
   bullet_surface = IMG_Load("assets/bullet.png"); // Bullets
   alien1_surface = IMG_Load("assets/alien1.png"); // Enemies
+  laser_surface = IMG_Load("assets/laser.png"); // Enemy lasers
   
   // Convert surface to texture
   background_texture = SDL_CreateTextureFromSurface(sdl_renderer, background_surface); 
   ship_texture = SDL_CreateTextureFromSurface(sdl_renderer, ship_surface); 
   bullet_texture = SDL_CreateTextureFromSurface(sdl_renderer, bullet_surface);
   alien1_texture = SDL_CreateTextureFromSurface(sdl_renderer, alien1_surface);
+  laser_texture = SDL_CreateTextureFromSurface(sdl_renderer, laser_surface);
   
   // Free surfaces since we will only be using textures from now on
   SDL_FreeSurface(background_surface);
   SDL_FreeSurface(ship_surface);
   SDL_FreeSurface(bullet_surface); 
   SDL_FreeSurface(alien1_surface); 
+  SDL_FreeSurface(laser_surface); 
 }
 
 Renderer::~Renderer() {
@@ -73,6 +76,12 @@ void Renderer::Render(Player const player, Level const level) {
   for (auto i : level.enemies) {
     SDL_Rect enemy = { (int)i.pos_x, (int)i.pos_y, i.width, i.height };
     SDL_RenderCopy(sdl_renderer, alien1_texture, NULL, &enemy);  
+  }
+  
+  // Render enemy bullets
+  for (auto i : level.lasers) {
+    SDL_Rect laser = { (int)i.pos_x, (int)i.pos_y, i.width, i.height };
+    SDL_RenderCopy(sdl_renderer, laser_texture, NULL, &laser);  
   }
 
   // Update Screen
