@@ -5,6 +5,7 @@
 #include <sstream>
 
 #include <thread>
+#include <chrono>
 
 Game::Game(int screen_width, int screen_height) : player(screen_width, screen_height), screen_width(screen_width), screen_height(screen_height), level(screen_width, screen_height) {}
 
@@ -24,6 +25,12 @@ void Game::Run(Controller const &controller, Renderer &renderer, std::size_t tar
   
     switch(game_state){
       case GameState::kMenuState:
+        while(true){
+          renderer.RenderMenu();
+          difficulty = controller.HandleMenuInput(app_running);
+          if(difficulty != 0 || !app_running) { break; }
+          std::this_thread::sleep_for(std::chrono::milliseconds(1)); //So that the constant while loop doesn't wreck the CPU
+        }
         game_state = GameState::kInitializeState;
         break;
         
@@ -34,7 +41,12 @@ void Game::Run(Controller const &controller, Renderer &renderer, std::size_t tar
         
         LoadConfig(difficulty, enemy_layers, enemy_numbers, high_score_name, high_score_value);
         level.PopulateEnemies(enemy_layers, enemy_numbers);
+        player.Initialise();
         t1 = std::thread(&Level::EnemyShootLoop, &level, std::ref(game_running));
+        
+        win = false;
+        game_running = true;
+        app_running = true;
         
         game_state = GameState::kRunningState;
         break;
@@ -45,8 +57,8 @@ void Game::Run(Controller const &controller, Renderer &renderer, std::size_t tar
           frame_start = SDL_GetTicks();
 
           // Input, Update, Render - the main game loop.
-          controller.HandleInput(game_running, player);
-          //if(!app_running) { game_running = false; } //break if ESC or SDL_QUIT is called in controller.HandleInput()
+          controller.HandleInput(app_running, player);
+          if(!app_running) { game_running = false; } //break if ESC or SDL_QUIT is called in controller.HandleInput()
           Update();
           renderer.Render(player, level);
           
@@ -85,7 +97,8 @@ void Game::Run(Controller const &controller, Renderer &renderer, std::size_t tar
       case GameState::kGameOverState:
         renderer.RenderFinalScreen(win);
         SDL_Delay(4000);
-        app_running = false;
+        game_state = GameState::kMenuState;
+        //app_running = false;
         break;
     }
   }

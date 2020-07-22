@@ -51,3 +51,36 @@ void Controller::HandleInput(bool &running, Player &player) const {
   }
   
 }
+
+int Controller::HandleMenuInput(bool &running) const {
+  
+  const Uint8 *keyboard_state_array = SDL_GetKeyboardState(NULL);
+  SDL_Event event;
+  SDL_PollEvent(&event);
+  
+  if (event.type == SDL_QUIT) {
+    running = false;
+  } 
+  else if(event.type == SDL_KEYDOWN || event.type == SDL_KEYUP) {
+    
+    if (keyboard_state_array[SDL_SCANCODE_E])
+    {
+      return 1;
+    }
+    if (keyboard_state_array[SDL_SCANCODE_M])
+    {
+      return 2;
+    }
+
+    if (keyboard_state_array[SDL_SCANCODE_H])
+    {
+      return 3;
+    }
+    if (keyboard_state_array[SDL_SCANCODE_ESCAPE])
+    {
+      running = false;
+    }
+  } 
+  return 0;
+
+}

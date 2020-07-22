@@ -21,7 +21,7 @@ class Game {
   
  private:
   
-  int difficulty = 1;
+  int difficulty = 0; // Can be 1 (Easy), 2 (Medium), 3 (Hard)  Default is 0 - require input from user to change
   int enemy_layers = 1;
   int enemy_numbers = 5;
   bool win = false;

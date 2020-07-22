@@ -7,6 +7,7 @@
 class Controller {
  public:
   void HandleInput(bool &running, Player &player) const;
+  int HandleMenuInput(bool &running) const;
 
  private:
 };

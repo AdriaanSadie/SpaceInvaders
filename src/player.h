@@ -23,11 +23,11 @@ private:
 class Player {
 public:
   
-  Player(int screen_width, int screen_height) : pos_x(screen_width/2), pos_y(screen_height/2), screen_width(screen_width), screen_height(screen_height) {}
+  Player(int screen_width, int screen_height) : screen_width(screen_width), screen_height(screen_height) {}
   
   void Update();
-  
   void Shoot();
+  void Initialise();
 
   float speed = 4;
   bool alive = true;

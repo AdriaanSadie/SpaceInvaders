@@ -13,6 +13,7 @@ class Renderer {
   ~Renderer();
 
   void Render(Player const player, Level const level);
+  void RenderMenu();
   void RenderFinalScreen(bool win);
   void UpdateWindowTitle(int fps, int bullets);
 
@@ -20,6 +21,8 @@ class Renderer {
   SDL_Window *sdl_window;
   SDL_Renderer *sdl_renderer;
   
+  SDL_Surface *menu_surface = nullptr;
+  SDL_Texture *menu_texture = nullptr;
   SDL_Surface *background_surface = nullptr;
   SDL_Texture *background_texture = nullptr;
   SDL_Surface *gameover_surface = nullptr;

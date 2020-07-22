@@ -32,6 +32,12 @@ void Player::Shoot() {
   bullets.push_back(bullet);
 }
 
+void Player::Initialise() {
+  pos_x = screen_width / 2  - width / 2.0;
+  pos_y = screen_height * (0.9);
+  bullets.clear();
+}
+
 void Projectile::Update(){
   // Move projectile upwards
   pos_y -= speed;  

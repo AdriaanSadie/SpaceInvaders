@@ -8,6 +8,8 @@
 #include <chrono>
 
 void Level::PopulateEnemies(int enemy_layers, int enemy_numbers){
+  enemies.clear();
+  lasers.clear();
   for (int i = 0; i < enemy_layers; i++){
     for (int j = 1; j <= enemy_numbers; j++){
       Enemy enemy(screen_width/(enemy_numbers+1) * j - 50/2, 50 + 1.5 * 40 * i);  
