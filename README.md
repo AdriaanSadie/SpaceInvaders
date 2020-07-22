@@ -2,7 +2,16 @@
 
 ## Project Description
 
-Option 1 (video game) was chosen for a project. A simple version of Space Invaders was written, using the starter code of the Snake project as base. The game starts by showing the user a menu, where the difficulty is chosen. After this the game starts, where enemies (which are able to shoot) start to move from the top of the screen slowly to the bottom. The objective of the player is to shoot the enemies before they reach the player, or the bottom of the screen. When a player wins, the high score is updated and stored. When the player loses, a Game Over screen is shown (depending on the current score, the high score is updated) and an option is given to start over.
+Option 1 (video game) was chosen for a project. A simple version of Space Invaders was written, using the starter code of the Snake project as base. The game starts by showing the user a menu, where the difficulty is chosen. After this the game starts, where enemies (which are able to shoot) start to move from the top of the screen slowly to the bottom. The objective of the player is to shoot the enemies before they shoot the player. When a player wins (all enemies shot down), the player wins. When the player loses, a Game Over screen is shown. The game then resets automatically after a slight delay. At any point ESC can be pressed to exit the game.
+
+The file and class structure is set up as follows:
+
+1. main.cpp -> Contains constants regarding game window and creates the Game, Controller and Render objects. The Game::Run() method is then called which starts the game state machine
+2. renderer.cpp -> Renderer class. Methods to render the game window, the player, the enemies and all projectiles. Also renders the menu and game-over screens.
+3. controller.cpp -> Controller class. Handles all input from the user. Has two methods: input while in the menu, and input while in-game.
+4. game.cpp -> Game class. Has the main Run() method which contains a state machine that handles all stages of the game: Main menu -> Initialise -> Game loop -> Game-over screen. Owns the Player and Level objects.
+5. player.cpp -> Player and Projectile classes. Contains the Player class which represents the player with all the necessary member variables and functions. Also contains the Projectile class which is responsible for all the bullets and lasers in the game.
+6. level.cpp -> Level and Enemy classes. Contains the Level class which owns the enemy vector as well as the lasers vector and is responsible for all the enemy and lasers creation and movement. The Enemy class is similar to the player class and holds all the necessary member variables and functions for the aliens.
 
 ## Additional libraries required:
 
@@ -19,7 +28,6 @@ The SDL_image library is used to import PNG images with a transparent background
 	* >> cmake .. && make
 3. Run game:
 	* >> ./SpaceInvaders
-
 
 ## Specifications met as stated on Project Rubric:
 
@@ -44,7 +52,7 @@ Base requirements:
     
 Additional requirements:
 
-
+*Loops, Functions, I/O
     
 
 

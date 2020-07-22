@@ -62,7 +62,7 @@ Renderer::~Renderer() {
   SDL_Quit();
 }
 
-void Renderer::Render(Player const player, Level const level) {
+void Renderer::Render(Player player, Level const level) {
 
   // Clear screen
   //SDL_SetRenderDrawColor(sdl_renderer, 0x1E, 0x1E, 0x1E, 0xFF);
@@ -72,24 +72,24 @@ void Renderer::Render(Player const player, Level const level) {
   SDL_RenderCopy(sdl_renderer, background_texture, NULL, NULL);
   
   // Render ship
-  SDL_Rect player_rect = { (int)player.pos_x, (int)player.pos_y, player.width, player.height };
+  SDL_Rect player_rect = { (int)player.getPosX(), (int)player.getPosY(), player.getWidth(), player.getHeight() };
   SDL_RenderCopy(sdl_renderer, ship_texture, NULL, &player_rect);
   
   // Render bullets
   for (auto i : player.bullets) {
-    SDL_Rect bullet = { (int)i.pos_x, (int)i.pos_y, i.width, i.height };
+    SDL_Rect bullet = { (int)i.getPosX(), (int)i.getPosY(), i.getWidth(), i.getHeight() };
     SDL_RenderCopy(sdl_renderer, bullet_texture, NULL, &bullet);
   }
   
   // Render enemies
   for (auto i : level.enemies) {
-    SDL_Rect enemy = { (int)i.pos_x, (int)i.pos_y, i.width, i.height };
+    SDL_Rect enemy = { (int)i.getPosX(), (int)i.getPosY(), i.getWidth(), i.getHeight() };
     SDL_RenderCopy(sdl_renderer, alien1_texture, NULL, &enemy);  
   }
   
   // Render enemy bullets
   for (auto i : level.lasers) {
-    SDL_Rect laser = { (int)i.pos_x, (int)i.pos_y, i.width, i.height };
+    SDL_Rect laser = { (int)i.getPosX(), (int)i.getPosY(), i.getWidth(), i.getHeight() };
     SDL_RenderCopy(sdl_renderer, laser_texture, NULL, &laser);  
   }
 

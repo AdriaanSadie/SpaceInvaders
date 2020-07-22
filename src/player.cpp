@@ -3,6 +3,9 @@
 #include <iostream>
 #include <algorithm>
 
+// Getters and Setters:
+
+
 void Player::Update() {
 
   if (!move_idle) {
@@ -23,7 +26,7 @@ void Player::Update() {
   for (auto& i : bullets){
     i.Update();
   }
-  bullets.erase(std::remove_if(bullets.begin(), bullets.end(), [](Projectile p) { return p.pos_y < -p.height; }), bullets.end());
+  bullets.erase(std::remove_if(bullets.begin(), bullets.end(), [](Projectile p) { return p.getPosY() < -p.getHeight(); }), bullets.end());
   
 }
 

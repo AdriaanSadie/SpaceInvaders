@@ -31,7 +31,7 @@ void Level::Update(Player &player, bool &game_running) {
 }
 
 bool Level::CheckCollidePlayer(Player p, Projectile l){
-  return l.pos_x >= (p.pos_x - l.width/2) && l.pos_x <= (p.pos_x + p.width - l.width/2) && l.pos_y <= (p.pos_y + p.height) && l.pos_y >= p.pos_y;
+  return l.getPosX() >= (p.getPosX() - l.getWidth()/2) && l.getPosX() <= (p.getPosX() + p.getWidth() - l.getWidth()/2) && l.getPosY() <= (p.getPosY() + p.getHeight()) && l.getPosY() >= p.getPosY();
 }
 
 bool Level::CheckCollideEnemy(Projectile p){
@@ -45,7 +45,7 @@ bool Level::CheckCollideEnemy(Projectile p){
 
 bool Level::CheckRangeEnemy(Enemy e, Projectile p){ 
   // Returns true if the enemy coordinates are within a certain range of the projectile coordinates
-  return p.pos_x >= (e.pos_x - p.width/2) && p.pos_x <= (e.pos_x + e.width - p.width/2) && p.pos_y <= (e.pos_y + e.height) && p.pos_y >= e.pos_y;
+  return p.getPosX() >= (e.getPosX() - p.getWidth()/2) && p.getPosX() <= (e.getPosX() + e.getWidth() - p.getWidth()/2) && p.getPosY() <= (e.getPosY() + e.getHeight()) && p.getPosY() >= e.getPosY();
 }
 
 void Level::MoveEnemies(){
@@ -56,23 +56,23 @@ void Level::MoveEnemies(){
   for (auto &e : enemies){
     if(Enemy_mLeft && !Enemy_mDown){
       // Enemies moving left
-      e.pos_x -= e.speed;
+      e.changePosX(-1 * e.getSpeed());
       // Check borders (if a single enemy reaches it, the direction changes to down)
-      if (e.pos_x <= 0){
+      if (e.getPosX() <= 0){
         Enemy_mDown = true;  
       }
     }
     else if (!Enemy_mLeft && !Enemy_mDown){
       // Enemies moving right
-      e.pos_x += e.speed;
+      e.changePosX(e.getSpeed());
       // Check borders (if a single enemy reaches it, the direction changes to down)
-      if (e.pos_x >= (screen_width - e.width)){
+      if (e.getPosX() >= (screen_width - e.getWidth())){
         Enemy_mDown = true;  
       }
     }
     else if (Enemy_mDown){
       // Enemies moving down
-      e.pos_y += e.speed;
+      e.changePosY(e.getSpeed());
       down_counter++;
       // Check down counter. When limit (hardcoded) reached, change direction from left to right or vice versa
       if (down_counter > 150){
@@ -102,7 +102,7 @@ void Level::EnemyShoot(int chance){
     // Generate random number between 1 and 10
     rand_num = rand() % 10 + 1;
     if (rand_num <= chance){
-      Projectile laser(e.pos_x + e.width/2 - 6, e.pos_y);
+      Projectile laser(e.getPosX() + e.getWidth()/2.0 - 6, e.getPosY());
       lasers.push_back(laser);
     }
   }
@@ -110,7 +110,7 @@ void Level::EnemyShoot(int chance){
 
 void Level::UpdateLasers(){
   for (auto &b : lasers) {
-    b.pos_y += b.speed;
+    b.changePosY(b.getSpeed());
   }
 }
 
