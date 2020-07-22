@@ -35,15 +35,16 @@ void Game::Run(Controller const &controller, Renderer &renderer, std::size_t tar
         break;
         
       case GameState::kInitializeState:
+        
         // Load info from config file: 
         // -- Depending on difficulty level, loads different values of enemies (layers and numbers)
-        // -- Loads the high score and the name associated with it
-        
+        // -- Loads the high score and the name associated with it (Do not actually use high score yet)
         LoadConfig(difficulty, enemy_layers, enemy_numbers, high_score_name, high_score_value);
         level.PopulateEnemies(enemy_layers, enemy_numbers);
         player.Initialise();
         t1 = std::thread(&Level::EnemyShootLoop, &level, std::ref(game_running));
         
+        // Reset values
         win = false;
         game_running = true;
         app_running = true;
@@ -76,7 +77,7 @@ void Game::Run(Controller const &controller, Renderer &renderer, std::size_t tar
 
           // After every second, update the window title.
           if (frame_end - title_timestamp >= 1000) {
-            renderer.UpdateWindowTitle(frame_count, player.bullets.size());
+            renderer.UpdateWindowTitle(frame_count);
             frame_count = 0;
             title_timestamp = frame_end;
           }

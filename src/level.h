@@ -9,7 +9,6 @@ class Enemy {
 public:
   // Constructor
   Enemy(float x, float y) : pos_x(x), pos_y(y) {}  
-  
   // Getters and Setters
   float getPosX() { return pos_x; }
   float getPosY() { return pos_y; }
@@ -32,10 +31,8 @@ private:
 
 class Level {
 public:
-  
   // Constructor
   Level(int screen_width, int screen_height) : screen_width(screen_width), screen_height(screen_height) {}
-  
   // Public methods
   void PopulateEnemies(int, int);  
   void Update(Player&, bool&);

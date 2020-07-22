@@ -124,7 +124,7 @@ void Renderer::RenderFinalScreen(bool win){
   SDL_RenderPresent(sdl_renderer);
 }
 
-void Renderer::UpdateWindowTitle(int fps, int bullets) {
-  std::string title{"Space Invaders --  FPS: " + std::to_string(fps) + " bullets: " + std::to_string(bullets)};
+void Renderer::UpdateWindowTitle(int fps) {
+  std::string title{"Space Invaders  FPS: " + std::to_string(fps)};
   SDL_SetWindowTitle(sdl_window, title.c_str());
 }

@@ -15,7 +15,7 @@ class Renderer {
   void Render(Player const player, Level const level);
   void RenderMenu();
   void RenderFinalScreen(bool win);
-  void UpdateWindowTitle(int fps, int bullets);
+  void UpdateWindowTitle(int fps);
 
  private:
   SDL_Window *sdl_window;
