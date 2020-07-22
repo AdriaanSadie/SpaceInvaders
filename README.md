@@ -98,7 +98,7 @@ The SDL_image library is used to import PNG images with a transparent background
 
 ## Conclusion
 
-As described in the above section, eight of the rubric criteria was met, excluding the base requirements of the compilation and README file.
+As described in the above section, eight of the rubric criteria was met, as well as the base requirements of the compilation and README file.
         
 ## Recommendations
 
