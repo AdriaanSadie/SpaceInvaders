@@ -26,6 +26,8 @@ Renderer::Renderer(const std::size_t screen_width, const std::size_t screen_heig
   
   // Load all assets:
   background_surface = SDL_LoadBMP("assets/back.bmp"); // Background
+  gameover_surface = SDL_LoadBMP("assets/gameover.bmp"); // GameOver screen
+  victory_surface = SDL_LoadBMP("assets/victoryscreen.bmp"); // Victory screen
   ship_surface = IMG_Load("assets/ship.png"); // Spaceship
   bullet_surface = IMG_Load("assets/bullet.png"); // Bullets
   alien1_surface = IMG_Load("assets/alien1.png"); // Enemies
@@ -33,6 +35,8 @@ Renderer::Renderer(const std::size_t screen_width, const std::size_t screen_heig
   
   // Convert surface to texture
   background_texture = SDL_CreateTextureFromSurface(sdl_renderer, background_surface); 
+  gameover_texture = SDL_CreateTextureFromSurface(sdl_renderer, gameover_surface);
+  victory_texture = SDL_CreateTextureFromSurface(sdl_renderer, victory_surface);
   ship_texture = SDL_CreateTextureFromSurface(sdl_renderer, ship_surface); 
   bullet_texture = SDL_CreateTextureFromSurface(sdl_renderer, bullet_surface);
   alien1_texture = SDL_CreateTextureFromSurface(sdl_renderer, alien1_surface);
@@ -40,6 +44,8 @@ Renderer::Renderer(const std::size_t screen_width, const std::size_t screen_heig
   
   // Free surfaces since we will only be using textures from now on
   SDL_FreeSurface(background_surface);
+  SDL_FreeSurface(gameover_surface);
+  SDL_FreeSurface(victory_surface);
   SDL_FreeSurface(ship_surface);
   SDL_FreeSurface(bullet_surface); 
   SDL_FreeSurface(alien1_surface); 
@@ -84,6 +90,23 @@ void Renderer::Render(Player const player, Level const level) {
     SDL_RenderCopy(sdl_renderer, laser_texture, NULL, &laser);  
   }
 
+  // Update Screen
+  SDL_RenderPresent(sdl_renderer);
+}
+
+void Renderer::RenderFinalScreen(bool win){
+  // Clear screen
+  SDL_SetRenderDrawColor(sdl_renderer, 0x1E, 0x1E, 0x1E, 0xFF);
+  SDL_RenderClear(sdl_renderer);
+  
+  // Render Screen
+  if(win){
+    SDL_RenderCopy(sdl_renderer, victory_texture, NULL, NULL);  
+  }
+  else{
+    SDL_RenderCopy(sdl_renderer, gameover_texture, NULL, NULL);  
+  }
+  
   // Update Screen
   SDL_RenderPresent(sdl_renderer);
 }

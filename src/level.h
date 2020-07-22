@@ -30,7 +30,7 @@ public:
   
   // Public methods
   void PopulateEnemies(int, int);  
-  void Update(Player&);
+  void Update(Player&, bool&);
   bool CheckCollideEnemy(Projectile);
   bool CheckCollidePlayer(Player, Projectile);
   bool CheckRangeEnemy(Enemy, Projectile);

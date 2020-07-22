@@ -13,6 +13,7 @@ class Renderer {
   ~Renderer();
 
   void Render(Player const player, Level const level);
+  void RenderFinalScreen(bool win);
   void UpdateWindowTitle(int fps, int bullets);
 
  private:
@@ -21,6 +22,10 @@ class Renderer {
   
   SDL_Surface *background_surface = nullptr;
   SDL_Texture *background_texture = nullptr;
+  SDL_Surface *gameover_surface = nullptr;
+  SDL_Texture *gameover_texture = nullptr;
+  SDL_Surface *victory_surface = nullptr;
+  SDL_Texture *victory_texture = nullptr;
   SDL_Surface *ship_surface = nullptr;
   SDL_Texture *ship_texture = nullptr;
   SDL_Surface *bullet_surface = nullptr;

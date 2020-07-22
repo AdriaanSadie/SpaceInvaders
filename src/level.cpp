@@ -16,11 +16,13 @@ void Level::PopulateEnemies(int enemy_layers, int enemy_numbers){
   }
 }
 
-void Level::Update(Player &player) {
+void Level::Update(Player &player, bool &game_running) {
   // Remove any bullets that collide with enemies, using a predicate function (CheckCollide) inside a lambda. 
   player.bullets.erase(std::remove_if(player.bullets.begin(), player.bullets.end(), [this](Projectile p) { return CheckCollideEnemy(p); }), player.bullets.end());
-  // Remove any enemy lasers that collide with the player
+  // Remove any enemy lasers that collide with the player and set: 
+  int laser_len = lasers.size();
   lasers.erase(std::remove_if(lasers.begin(), lasers.end(), [player, this](Projectile p) { return CheckCollidePlayer(player, p); } ), lasers.end());
+  if (laser_len != lasers.size()) { game_running = false; } // End game since laser hit the player
   // After checking collision, update enemy movement
   MoveEnemies();
   UpdateLasers();
