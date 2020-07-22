@@ -31,9 +31,11 @@ public:
   // Public methods
   void PopulateEnemies(int, int);  
   void Update(Player&);
-  bool CheckCollide(Projectile);
-  bool CheckRange(Enemy, Projectile);
+  bool CheckCollideEnemy(Projectile);
+  bool CheckCollidePlayer(Player, Projectile);
+  bool CheckRangeEnemy(Enemy, Projectile);
   void MoveEnemies();
+  void EnemyShootLoop(bool &);
   void EnemyShoot(int);
   void UpdateLasers();
   

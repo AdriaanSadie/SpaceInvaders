@@ -17,6 +17,10 @@ algorithm
 -
 time.h
 -
+thread
+-
+chrono
+-
 
 /home/workspace/SpaceInvaders/src/level.h
 vector

@@ -4,12 +4,15 @@
 #include <fstream>
 #include <sstream>
 
+#include <thread>
+
 Game::Game(int screen_width, int screen_height) : player(screen_width, screen_height), screen_width(screen_width), screen_height(screen_height), level(screen_width, screen_height) {}
 
 void Game::Update() {  
   player.Update();
   level.Update(player);
 }
+
 
 void Game::Run(Controller const &controller, Renderer &renderer, std::size_t target_frame_duration) {
   Uint32 title_timestamp = SDL_GetTicks();
@@ -24,6 +27,8 @@ void Game::Run(Controller const &controller, Renderer &renderer, std::size_t tar
   // -- Loads the high score and the name associated with it
   LoadConfig(difficulty, enemy_layers, enemy_numbers, high_score_name, high_score_value);
   level.PopulateEnemies(enemy_layers, enemy_numbers);
+  
+  std::thread t1(&Level::EnemyShootLoop, &level, std::ref(running));
 
   while (running) {
     frame_start = SDL_GetTicks();
@@ -54,6 +59,9 @@ void Game::Run(Controller const &controller, Renderer &renderer, std::size_t tar
       SDL_Delay(target_frame_duration - frame_duration);
     }
   }
+  
+  t1.join();
+  
 }
 
 void Game::LoadConfig(int difficulty, int &enemy_layers, int &enemy_numbers, std::string &high_score_name, int &high_score_value){

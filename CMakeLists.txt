@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.7)
 
-add_definitions(-std=c++17)
+add_definitions(-std=c++17 -pthread)
 
 set(CXX_FLAGS "-Wall")
 set(CMAKE_CXX_FLAGS, "${CXX_FLAGS}")
@@ -14,4 +14,4 @@ include_directories(${SDL2_INCLUDE_DIRS} src ${SDL2IMAGE_INCLUDE_DIRS})
 
 add_executable(SpaceInvaders src/main.cpp src/renderer.cpp src/game.cpp src/player.cpp src/controller.cpp src/level.cpp)
 string(STRIP ${SDL2_LIBRARIES} SDL2_LIBRARIES)
-target_link_libraries(SpaceInvaders ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES})
+target_link_libraries(SpaceInvaders ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES} pthread)

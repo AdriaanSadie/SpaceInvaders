@@ -4,6 +4,9 @@
 #include <algorithm>
 #include <time.h>
 
+#include <thread>
+#include <chrono>
+
 void Level::PopulateEnemies(int enemy_layers, int enemy_numbers){
   for (int i = 0; i < enemy_layers; i++){
     for (int j = 1; j <= enemy_numbers; j++){
@@ -15,26 +18,30 @@ void Level::PopulateEnemies(int enemy_layers, int enemy_numbers){
 
 void Level::Update(Player &player) {
   // Remove any bullets that collide with enemies, using a predicate function (CheckCollide) inside a lambda. 
-  player.bullets.erase(std::remove_if(player.bullets.begin(), player.bullets.end(), [this](Projectile p) { return CheckCollide(p); }), player.bullets.end());
+  player.bullets.erase(std::remove_if(player.bullets.begin(), player.bullets.end(), [this](Projectile p) { return CheckCollideEnemy(p); }), player.bullets.end());
+  // Remove any enemy lasers that collide with the player
+  lasers.erase(std::remove_if(lasers.begin(), lasers.end(), [player, this](Projectile p) { return CheckCollidePlayer(player, p); } ), lasers.end());
   // After checking collision, update enemy movement
   MoveEnemies();
-  EnemyShoot(2);
   UpdateLasers();
-  std::cout << "Laser vector size: " << lasers.size() << std::endl;
 }
 
-bool Level::CheckCollide(Projectile p){
+bool Level::CheckCollidePlayer(Player p, Projectile l){
+  return l.pos_x >= (p.pos_x - l.width/2) && l.pos_x <= (p.pos_x + p.width - l.width/2) && l.pos_y <= (p.pos_y + p.height) && l.pos_y >= p.pos_y;
+}
+
+bool Level::CheckCollideEnemy(Projectile p){
   // Store original size of enemy vector
   int orig = enemies.size();
   // Remove any enemies that collide with bullets, using a predicate function (CheckRange) inside a lambda
-  enemies.erase(std::remove_if(enemies.begin(), enemies.end(), [p, this](Enemy e) { return CheckRange(e, p); } ), enemies.end());
+  enemies.erase(std::remove_if(enemies.begin(), enemies.end(), [p, this](Enemy e) { return CheckRangeEnemy(e, p); } ), enemies.end());
   // Return true if any enemies were removed, thus signalling that bullets need to be removed as well
   return enemies.size() != orig;
 }
 
-bool Level::CheckRange(Enemy e, Projectile p){ 
+bool Level::CheckRangeEnemy(Enemy e, Projectile p){ 
   // Returns true if the enemy coordinates are within a certain range of the projectile coordinates
-  return p.pos_x >= (e.pos_x - p.width/2) && p.pos_x <= (e.pos_x + e.width - p.width/2) && p.pos_y <= (e.pos_y + e.height) && p.pos_y <= e.pos_y;
+  return p.pos_x >= (e.pos_x - p.width/2) && p.pos_x <= (e.pos_x + e.width - p.width/2) && p.pos_y <= (e.pos_y + e.height) && p.pos_y >= e.pos_y;
 }
 
 void Level::MoveEnemies(){
@@ -71,6 +78,13 @@ void Level::MoveEnemies(){
         else{ Enemy_mLeft = true; }
       }
     }
+  }
+}
+
+void Level::EnemyShootLoop(bool &running){
+  while(running){
+    std::this_thread::sleep_for(std::chrono::milliseconds(500)); // Only call shoot every 0.5 seconds
+    EnemyShoot(2); // 2/10 chance for each enemy to shoot
   }
 }
 
