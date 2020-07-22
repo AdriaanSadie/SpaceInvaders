@@ -1,1 +1,1 @@
-/usr/bin/g++-7  -std=c++17   CMakeFiles/SpaceInvaders.dir/src/main.cpp.o  -o SpaceInvaders -L/usr/lib/x86_64-linux-gnu  -lSDL2 
+/usr/bin/g++-7  -std=c++17   CMakeFiles/SpaceInvaders.dir/src/main.cpp.o CMakeFiles/SpaceInvaders.dir/src/renderer.cpp.o CMakeFiles/SpaceInvaders.dir/src/game.cpp.o CMakeFiles/SpaceInvaders.dir/src/player.cpp.o CMakeFiles/SpaceInvaders.dir/src/controller.cpp.o CMakeFiles/SpaceInvaders.dir/src/level.cpp.o  -o SpaceInvaders -L/usr/lib/x86_64-linux-gnu  -lSDL2 -lSDL2_image -lSDL2 -lpthread 
